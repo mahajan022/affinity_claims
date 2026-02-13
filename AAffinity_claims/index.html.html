@@ -1,0 +1,2058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affinity Claims Portal - Policy Documents</title>
+    <style>
+        /* Plain system fonts - easy to read for everyone */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1a2744;
+            --accent: #3b6ef5;
+            --accent2: #e84393;
+            --green: #00c896;
+            --teal: #0fb5ae;
+            --bg: #f2f4fa;
+            --card: #ffffff;
+            --border: #e2e6f0;
+            --text: #1a2744;
+            --muted: #7a8aaa;
+            --shadow: 0 4px 24px rgba(26,39,68,0.10);
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            padding: 24px;
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            background: var(--card);
+            border-radius: 24px;
+            box-shadow: 0 8px 48px rgba(26,39,68,0.13);
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(120deg, #1a2744 0%, #2d4a8a 60%, #3b6ef5 100%);
+            color: white;
+            padding: 44px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 280px; height: 280px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.04);
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -80px; left: 40%;
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            background: rgba(59,110,245,0.18);
+        }
+        .header h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 2.4em;
+            font-weight: bold;
+            letter-spacing: 0px;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .header p {
+            font-size: 1.05em;
+            opacity: 0.75;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* SEARCH */
+        .search-bar {
+            padding: 24px 40px;
+            background: #f8f9fd;
+            border-bottom: 1.5px solid var(--border);
+        }
+        .search-input {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            outline: none;
+            background: white;
+            transition: all 0.2s;
+        }
+        .search-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59,110,245,0.10);
+        }
+
+        /* CONTENT */
+        .content { padding: 36px 40px; }
+
+        .category-section { margin-bottom: 44px; }
+        .category-title {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2.5px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .category-icon {
+            width: 34px; height: 34px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1em;
+        }
+
+        /* POLICY GRID */
+        .policy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 18px;
+        }
+
+        .policy-card {
+            background: white;
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 22px;
+            transition: all 0.25s;
+            position: relative;
+        }
+        .policy-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent);
+        }
+
+        .policy-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        .policy-name {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--primary);
+            flex: 1;
+        }
+
+        .spoc-button {
+            background: var(--accent2);
+            color: white;
+            border: none;
+            padding: 5px 11px;
+            border-radius: 7px;
+            font-size: 0.75em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            margin-left: 8px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .spoc-button:hover { background: #c7336b; transform: scale(1.04); }
+
+        .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+        .policy-type {
+            display: inline-block;
+            background: #e8eeff;
+            color: var(--accent);
+            padding: 3px 11px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        .insurer-badge {
+            display: inline-block;
+            background: #fff3cd;
+            color: #7a4a00;
+            border: 1.5px solid #f0a500;
+            padding: 4px 13px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .policy-description {
+            color: var(--muted);
+            font-size: 0.88em;
+            line-height: 1.55;
+            margin-bottom: 14px;
+        }
+
+        .button-group { display: flex; gap: 8px; flex-wrap: wrap; }
+
+        .policy-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--accent);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .policy-button:hover { background: #2756d6; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59,110,245,0.3); }
+
+        .upload-button {
+            background: var(--green);
+            position: relative; overflow: hidden;
+        }
+        .upload-button:hover { background: #00a87e; }
+        .upload-button input[type="file"] {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0; cursor: pointer;
+        }
+
+        .view-excel-button { background: var(--teal); }
+        .view-excel-button:hover { background: #0a9991; }
+        .view-excel-button:disabled {
+            background: #ccc; cursor: not-allowed; opacity: 0.6;
+        }
+        .view-excel-button:disabled:hover { transform: none; box-shadow: none; }
+
+        .excel-info {
+            display: none;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: #e8f9f4;
+            border-left: 3px solid var(--green);
+            border-radius: 6px;
+            font-size: 0.82em;
+            color: #007a5e;
+        }
+        .excel-info.visible { display: block; }
+
+        /* STATS */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0;
+            background: #f8f9fd;
+            border-top: 1.5px solid var(--border);
+        }
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            border-right: 1px solid var(--border);
+        }
+        .stat-item:last-child { border-right: none; }
+        .stat-number {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        .stat-label { color: var(--muted); font-size: 0.85em; margin-top: 4px; }
+
+        /* NO RESULTS */
+        .no-results {
+            text-align: center; padding: 60px 20px; color: var(--muted);
+        }
+
+        /* ===================== MODAL SHARED ===================== */
+        .modal {
+            display: none;
+            position: fixed; z-index: 1000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(20,30,60,0.65);
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.2s;
+        }
+        .modal.active { display: flex; align-items: center; justify-content: center; }
+
+        .modal-content {
+            background: white;
+            border-radius: 18px;
+            width: 90%; max-width: 700px;
+            max-height: 92vh;
+            display: flex; flex-direction: column;
+            animation: slideIn 0.25s;
+            box-shadow: 0 24px 80px rgba(26,39,68,0.25);
+        }
+        .modal-content.wide { max-width: 1200px; }
+
+        .modal-header {
+            padding: 20px 28px;
+            background: linear-gradient(120deg, #1a2744, #2d4a8a);
+            color: white;
+            border-radius: 18px 18px 0 0;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-header h2 {
+            margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 1.3em; font-weight: bold;
+        }
+        .close-button {
+            background: rgba(255,255,255,0.15); border: none; color: white;
+            font-size: 1.5em; cursor: pointer; width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; transition: background 0.2s;
+        }
+        .close-button:hover { background: rgba(255,255,255,0.3); }
+
+        .modal-body {
+            padding: 28px; overflow-y: auto; flex: 1;
+        }
+
+        /* ===================== SPOC MODAL ===================== */
+        .spoc-section {
+            background: #f8f9fd;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .spoc-section h3 {
+            font-family: 'Syne', sans-serif;
+            color: var(--primary);
+            margin-bottom: 14px;
+            font-size: 1.1em;
+        }
+
+        .edit-toggle-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--accent); color: white;
+            border: none; padding: 7px 16px;
+            border-radius: 8px; font-size: 0.9em; font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            cursor: pointer; transition: all 0.2s; margin-bottom: 16px;
+        }
+        .edit-toggle-btn:hover { background: #2756d6; }
+        .edit-toggle-btn.save { background: var(--green); }
+        .edit-toggle-btn.save:hover { background: #00a87e; }
+
+        .spoc-view-row {
+            display: flex; padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .spoc-view-row:last-child { border-bottom: none; }
+        .spoc-label { font-weight: 600; color: #495057; min-width: 140px; font-size: 0.9em; }
+        .spoc-value { color: var(--text); font-size: 0.9em; white-space: pre-line; }
+
+        .spoc-edit-form { display: none; }
+        .spoc-edit-form.visible { display: block; }
+
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block; font-weight: 600; color: var(--primary);
+            font-size: 0.85em; margin-bottom: 6px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.9em;
+            outline: none;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59,110,245,0.1);
+        }
+
+        .contact-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: white; border: 1px solid var(--border);
+            padding: 8px 14px; border-radius: 20px;
+            font-size: 0.87em; margin: 4px;
+        }
+
+        /* ===================== EXCEL MODAL ===================== */
+        .excel-search-bar {
+            padding: 14px 28px;
+            background: #f8f9fd;
+            border-bottom: 1.5px solid var(--border);
+        }
+        .search-results-info { margin-top: 8px; color: var(--muted); font-size: 0.85em; }
+
+        .excel-viewer { width: 100%; overflow-x: auto; }
+        .excel-table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
+        .excel-table th {
+            background: #f0f4ff;
+            padding: 11px 13px;
+            text-align: left;
+            border: 1px solid var(--border);
+            font-weight: 600;
+            color: var(--primary);
+            position: sticky; top: 0; z-index: 10;
+        }
+        .excel-table td { padding: 9px 13px; border: 1px solid var(--border); }
+        .excel-table tr:nth-child(even) { background: #f8f9fd; }
+        .excel-table tr:hover { background: #eef2ff; }
+        .excel-table tr.hidden-row { display: none; }
+        .excel-table tr.highlight { background: #fff8e1 !important; }
+        .highlight-text { background: #ffc107; padding: 2px 4px; border-radius: 3px; font-weight: 600; }
+
+        /* ===================== FAB ADD BUTTON ===================== */
+        .fab-add {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: linear-gradient(135deg, #00c896, #0fb5ae);
+            color: white;
+            border: none;
+            padding: 16px 28px;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(0,200,150,0.4);
+            transition: all 0.2s;
+            z-index: 500;
+            letter-spacing: 0.3px;
+        }
+        .fab-add:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 10px 30px rgba(0,200,150,0.5);
+        }
+
+        /* ===================== ADD POLICY MODAL ===================== */
+        .add-modal-content {
+            background: white;
+            border-radius: 18px;
+            width: 92%;
+            max-width: 680px;
+            max-height: 93vh;
+            display: flex;
+            flex-direction: column;
+            animation: slideIn 0.25s;
+            box-shadow: 0 24px 80px rgba(26,39,68,0.25);
+            overflow: hidden;
+        }
+        .step-indicator {
+            display: flex;
+            gap: 0;
+            background: #f8f9fd;
+            border-bottom: 1.5px solid var(--border);
+        }
+        .step-tab {
+            flex: 1;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 0.85em;
+            font-weight: bold;
+            color: var(--muted);
+            background: transparent;
+            border: none;
+            cursor: default;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .step-tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+            background: white;
+        }
+        .step-tab.done {
+            color: var(--green);
+            border-bottom-color: var(--green);
+        }
+        .step-content { display: none; padding: 24px 28px; }
+        .step-content.active { display: block; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 0.88em;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+        .form-group label .required { color: #e84393; margin-left: 3px; }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.92em;
+            outline: none;
+            resize: vertical;
+            background: white;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59,110,245,0.1);
+        }
+        .handguide-upload-zone {
+            border: 2.5px dashed var(--border);
+            border-radius: 10px;
+            padding: 24px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #fafbff;
+            position: relative;
+        }
+        .handguide-upload-zone:hover,
+        .handguide-upload-zone.dragover {
+            border-color: var(--accent);
+            background: #eef2ff;
+        }
+        .handguide-upload-zone input {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0; cursor: pointer;
+        }
+        .handguide-upload-zone .upload-icon { font-size: 2.2em; margin-bottom: 8px; }
+        .handguide-upload-zone .upload-text { font-weight: bold; color: var(--primary); font-size: 0.95em; }
+        .handguide-upload-zone .upload-sub { color: var(--muted); font-size: 0.82em; margin-top: 4px; }
+        .file-preview {
+            display: none;
+            margin-top: 10px;
+            padding: 10px 14px;
+            background: #e8f9f4;
+            border-radius: 8px;
+            border-left: 3px solid var(--green);
+            font-size: 0.88em;
+            color: #007a5e;
+            font-weight: bold;
+        }
+        .file-preview.visible { display: flex; align-items: center; gap: 8px; justify-content: space-between; }
+        .remove-file-btn {
+            background: none; border: none; color: #e84393;
+            cursor: pointer; font-size: 1.1em; font-weight: bold;
+        }
+
+        .multi-pdf-list { margin-top: 10px; }
+        .multi-pdf-item {
+            display: flex; align-items: center; gap: 10px;
+            background: #f8f9fd; border: 1px solid var(--border);
+            border-radius: 8px; padding: 8px 12px; margin-bottom: 8px;
+        }
+        .multi-pdf-item input {
+            flex: 1; border: none; background: transparent;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.88em; outline: none; color: var(--primary);
+            font-style: italic;
+        }
+        .multi-pdf-item .pdf-name { font-size: 0.88em; color: var(--primary); font-weight: bold; flex: 1; }
+        .multi-pdf-item .remove-pdf { background: none; border: none; color: #e84393; cursor: pointer; font-size: 1.1em; }
+
+        .add-more-pdf {
+            background: none; border: 2px dashed var(--border);
+            border-radius: 8px; padding: 8px 16px;
+            color: var(--accent); font-weight: bold;
+            cursor: pointer; font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.88em; width: 100%; margin-top: 4px;
+            transition: all 0.2s;
+        }
+        .add-more-pdf:hover { border-color: var(--accent); background: #eef2ff; }
+
+        .nav-buttons {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 16px 28px 20px;
+            border-top: 1.5px solid var(--border);
+            background: #f8f9fd;
+        }
+        .btn-next {
+            background: var(--accent); color: white;
+            border: none; padding: 10px 28px;
+            border-radius: 8px; font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.95em; cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-next:hover { background: #2756d6; }
+        .btn-back {
+            background: #eee; color: var(--primary);
+            border: none; padding: 10px 22px;
+            border-radius: 8px; font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.95em; cursor: pointer;
+        }
+        .btn-save {
+            background: var(--green); color: white;
+            border: none; padding: 10px 28px;
+            border-radius: 8px; font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.95em; cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-save:hover { background: #00a87e; }
+
+        /* custom card delete button */
+        .delete-card-btn {
+            background: none; border: none;
+            color: #ccc; font-size: 1.1em;
+            cursor: pointer; margin-left: 6px;
+            transition: color 0.2s;
+        }
+        .delete-card-btn:hover { color: #e84393; }
+
+        /* handguide option buttons */
+        .hg-opt-btn {
+            padding: 9px 18px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: white;
+            color: var(--muted);
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.88em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .hg-opt-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .hg-opt-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .link-item {
+            display: flex; align-items: center; gap: 10px;
+            background: #f8f9fd; border: 1px solid var(--border);
+            border-radius: 8px; padding: 8px 12px; margin-bottom: 8px;
+        }
+        .link-item .link-label { font-weight: bold; font-size: 0.88em; color: var(--primary); min-width: 100px; }
+        .link-item .link-url { font-size: 0.82em; color: var(--accent); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .link-item .remove-link { background: none; border: none; color: #e84393; cursor: pointer; font-size: 1.1em; }
+
+    
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 28px 24px; }
+            .header h1 { font-size: 1.8em; }
+            .content { padding: 20px; }
+            .policy-grid { grid-template-columns: 1fr; }
+            .button-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- HEADER -->
+    <div class="header">
+        <h1>🛡️ Affinity Claims Portal</h1>
+        <p>Quick Access to Policy Documents &amp; Excel Upload System</p>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-bar">
+        <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search policies by name, type, or coverage...">
+    </div>
+
+    <div class="content">
+
+        <!-- GPA -->
+        <div class="category-section" data-category="gpa">
+            <h2 class="category-title"><span class="category-icon">🚗</span>GPA – Group Personal Accident</h2>
+            <div class="policy-grid">
+
+                <div class="policy-card" data-policy-id="pronto" data-keywords="pronto gpa auto drivers monthly personal accident 3,00,000">
+                    <div class="policy-header">
+                        <div class="policy-name">Pronto</div>
+                        <button class="spoc-button" onclick="showSPOC('pronto')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GPA</span><span class="insurer-badge">Magma General Insurance</span></div>
+                    <div class="policy-description">Monthly personal accident plan for auto drivers, providing coverage against personal accidents with a sum insured of ₹3,00,000.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="window.open('https://www.admin.healthysure.in/client-manager/corporate?limit=10&offset=0','_blank')">HS Portal</button>
+                        <button class="policy-button" onclick="openPDF('Policy Handguide_Pronto.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'pronto')"></label>
+                        <button class="policy-button view-excel-button" id="view-pronto" onclick="viewExcel('pronto')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-pronto"><span id="date-pronto"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="score10" data-keywords="score 10 gpa auto drivers annual personal accident 1,00,000">
+                    <div class="policy-header">
+                        <div class="policy-name">Score 10</div>
+                        <button class="spoc-button" onclick="showSPOC('score10')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GPA</span><span class="insurer-badge">Magma General Insurance</span></div>
+                    <div class="policy-description">Annual personal accident plan for auto drivers, providing coverage against personal accidents with a sum insured of ₹1,00,000.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="window.open('https://www.admin.healthysure.in/client-manager/corporate?limit=10&offset=0','_blank')">HS Portal</button>
+                        <button class="policy-button" onclick="openPDF('Policy Handguide_Score10.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'score10')"></label>
+                        <button class="policy-button view-excel-button" id="view-score10" onclick="viewExcel('score10')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-score10"><span id="date-score10"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="dvara-money" data-keywords="dvara money gpa drivers annual personal accident 5,00,000">
+                    <div class="policy-header">
+                        <div class="policy-name">Dvara Money</div>
+                        <button class="spoc-button" onclick="showSPOC('dvara-money')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GPA</span><span class="insurer-badge">Magma General Insurance</span></div>
+                    <div class="policy-description">Annual personal accident plan for drivers, providing coverage against personal accidents with a sum insured of ₹5,00,000.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="window.open('https://www.admin.healthysure.in/client-manager/corporate?limit=10&offset=0','_blank')">HS Portal</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'dvara-money')"></label>
+                        <button class="policy-button view-excel-button" id="view-dvara-money" onclick="viewExcel('dvara-money')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-dvara-money"><span id="date-dvara-money"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="apnamart" data-keywords="apnamart gpa delivery partners monthly personal accident 5,00,000">
+                    <div class="policy-header">
+                        <div class="policy-name">Apnamart</div>
+                        <button class="spoc-button" onclick="showSPOC('apnamart')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GPA</span><span class="insurer-badge">Magma General Insurance</span></div>
+                    <div class="policy-description">Monthly personal accident plan for delivery partners, providing coverage against personal accidents with a sum insured of ₹5,00,000.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="window.open('https://www.admin.healthysure.in/client-manager/corporate?limit=10&offset=0','_blank')">HS Portal</button>
+                        <button class="policy-button" onclick="openPDF('Policy Handguide_Log2 Retail.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'apnamart')"></label>
+                        <button class="policy-button view-excel-button" id="view-apnamart" onclick="viewExcel('apnamart')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-apnamart"><span id="date-apnamart"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="dealshare" data-keywords="dealshare gpa delivery partners monthly personal accident 2,00,000">
+                    <div class="policy-header">
+                        <div class="policy-name">Dealshare</div>
+                        <button class="spoc-button" onclick="showSPOC('dealshare')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GPA</span><span class="insurer-badge">Magma General Insurance</span></div>
+                    <div class="policy-description">Monthly personal accident plan for delivery partners, providing coverage against personal accidents with a sum insured of ₹2,00,000.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="window.open('https://www.admin.healthysure.in/client-manager/corporate?limit=10&offset=0','_blank')">HS Portal</button>
+                        <button class="policy-button" onclick="openPDF('Policy Handguide_Dealshare.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'dealshare')"></label>
+                        <button class="policy-button view-excel-button" id="view-dealshare" onclick="viewExcel('dealshare')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-dealshare"><span id="date-dealshare"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="eveez-gpa" data-keywords="eveez gpa delivery partners monthly personal accident 1,00,000">
+                    <div class="policy-header">
+                        <div class="policy-name">Eveez – GPA</div>
+                        <button class="spoc-button" onclick="showSPOC('eveez-gpa')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GPA</span><span class="insurer-badge">Magma General Insurance</span></div>
+                    <div class="policy-description">Monthly personal accident plan for delivery partners, providing coverage against personal accidents with a sum insured of ₹1,00,000.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="window.open('https://www.admin.healthysure.in/client-manager/corporate?limit=10&offset=0','_blank')">HS Portal</button>
+                        <button class="policy-button" onclick="openPDF('Policy Handguide_Eveez.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'eveez-gpa')"></label>
+                        <button class="policy-button view-excel-button" id="view-eveez-gpa" onclick="viewExcel('eveez-gpa')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-eveez-gpa"><span id="date-eveez-gpa"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="batterysmart-drivers" data-keywords="batterysmart drivers gpa monthly personal accident 2,00,000">
+                    <div class="policy-header">
+                        <div class="policy-name">Batterysmart – Drivers</div>
+                        <button class="spoc-button" onclick="showSPOC('batterysmart-drivers')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GPA</span><span class="insurer-badge">Magma General Insurance</span></div>
+                    <div class="policy-description">Monthly personal accident plan for drivers, providing coverage against personal accidents with a sum insured of ₹2,00,000.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="window.open('https://www.admin.healthysure.in/client-manager/corporate?limit=10&offset=0','_blank')">HS Portal</button>
+                        <button class="policy-button" onclick="openPDF('Policy Handguide_BS_GPAD.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'batterysmart-drivers')"></label>
+                        <button class="policy-button view-excel-button" id="view-batterysmart-drivers" onclick="viewExcel('batterysmart-drivers')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-batterysmart-drivers"><span id="date-batterysmart-drivers"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="batterysmart-operators" data-keywords="batterysmart operators gpa monthly personal accident 5,00,000">
+                    <div class="policy-header">
+                        <div class="policy-name">Batterysmart – Operators</div>
+                        <button class="spoc-button" onclick="showSPOC('batterysmart-operators')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GPA</span><span class="insurer-badge">Magma General Insurance</span></div>
+                    <div class="policy-description">Monthly personal accident plan for operators, providing coverage against personal accidents with a sum insured of ₹5,00,000.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="window.open('https://www.admin.healthysure.in/client-manager/corporate?limit=10&offset=0','_blank')">HS Portal</button>
+                        <button class="policy-button" onclick="openPDF('Policy Handguide_BS_GPAO.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'batterysmart-operators')"></label>
+                        <button class="policy-button view-excel-button" id="view-batterysmart-operators" onclick="viewExcel('batterysmart-operators')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-batterysmart-operators"><span id="date-batterysmart-operators"></span></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- GHI -->
+        <div class="category-section" data-category="ghi">
+            <h2 class="category-title"><span class="category-icon">🏥</span>GHI – Group Health Insurance</h2>
+            <div class="policy-grid">
+
+                <div class="policy-card" data-policy-id="blitz" data-keywords="blitz ghi gpa health personal accident delivery 1,00,000 3,00,000">
+                    <div class="policy-header">
+                        <div class="policy-name">Blitz</div>
+                        <button class="spoc-button" onclick="showSPOC('blitz')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GHI &amp; GPA</span><span class="insurer-badge">Reliance General Insurance</span></div>
+                    <div class="policy-description">Monthly health and personal accident plan for delivery partners. GHI coverage of ₹1,00,000 and GPA coverage of ₹3,00,000.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="window.open('https://www.admin.healthysure.in/client-manager/corporate?limit=10&offset=0','_blank')">HS Portal</button>
+                        <button class="policy-button" onclick="openPDF('Policy Handguide_Blitz.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'blitz')"></label>
+                        <button class="policy-button view-excel-button" id="view-blitz" onclick="viewExcel('blitz')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-blitz"><span id="date-blitz"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="swasth-udyog" data-keywords="swasth udyog ghi health touchlyfe">
+                    <div class="policy-header">
+                        <div class="policy-name">Swasth Udyog</div>
+                        <button class="spoc-button" onclick="showSPOC('swasth-udyog')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GHI</span><span class="insurer-badge">Manipal Cigna</span></div>
+                    <div class="policy-description">Group health insurance plan managed through the Swasth Udyog Portal.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="window.open('https://admin.touchlyfe.bharatsure.com/','_blank')">Swasth Udyog Portal</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'swasth-udyog')"></label>
+                        <button class="policy-button view-excel-button" id="view-swasth-udyog" onclick="viewExcel('swasth-udyog')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-swasth-udyog"><span id="date-swasth-udyog"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="quick-couriers" data-keywords="quick couriers ghi health">
+                    <div class="policy-header">
+                        <div class="policy-name">Quick Couriers</div>
+                        <button class="spoc-button" onclick="showSPOC('quick-couriers')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GHI</span><span class="insurer-badge">Manipal Cigna</span></div>
+                    <div class="policy-description">Group health insurance for quick courier partners.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="window.open('https://www.admin.healthysure.in/client-manager/corporate?limit=10&offset=0','_blank')">HS Portal</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'quick-couriers')"></label>
+                        <button class="policy-button view-excel-button" id="view-quick-couriers" onclick="viewExcel('quick-couriers')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-quick-couriers"><span id="date-quick-couriers"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="scripbox" data-keywords="scripbox ghi health care">
+                    <div class="policy-header">
+                        <div class="policy-name">Scripbox</div>
+                        <button class="spoc-button" onclick="showSPOC('scripbox')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GHI</span><span class="insurer-badge">Care Health</span></div>
+                    <div class="policy-description">Group health insurance coverage for Scripbox users.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="openPDF('Policy Handguide.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'scripbox')"></label>
+                        <button class="policy-button view-excel-button" id="view-scripbox" onclick="viewExcel('scripbox')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-scripbox"><span id="date-scripbox"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="tushil" data-keywords="tushil ghi health care">
+                    <div class="policy-header">
+                        <div class="policy-name">Tushil</div>
+                        <button class="spoc-button" onclick="showSPOC('tushil')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GHI</span><span class="insurer-badge">Care Health</span></div>
+                    <div class="policy-description">Group health insurance plan for Tushil members.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="openPDF('Policy Handguide.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'tushil')"></label>
+                        <button class="policy-button view-excel-button" id="view-tushil" onclick="viewExcel('tushil')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-tushil"><span id="date-tushil"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="bayleaf" data-keywords="bayleaf ghi gpa health students">
+                    <div class="policy-header">
+                        <div class="policy-name">Bayleaf</div>
+                        <button class="spoc-button" onclick="showSPOC('bayleaf')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GHI &amp; GPA</span><span class="insurer-badge">Magma General Insurance</span></div>
+                    <div class="policy-description">Health and accident plan for students.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="window.open('https://www.admin.bayleaf.bharatsure.com','_blank')">Bayleaf Portal</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'bayleaf')"></label>
+                        <button class="policy-button view-excel-button" id="view-bayleaf" onclick="viewExcel('bayleaf')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-bayleaf"><span id="date-bayleaf"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="crib" data-keywords="crib ghi gpa health students 1,00,000 3,00,000">
+                    <div class="policy-header">
+                        <div class="policy-name">Crib</div>
+                        <button class="spoc-button" onclick="showSPOC('crib')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">GHI &amp; GPA</span><span class="insurer-badge">Care Health</span></div>
+                    <div class="policy-description">Monthly health and personal accident plan for students. GHI coverage ₹1,00,000 and GPA ₹3,00,000.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="window.open('https://admin.crib.bharatsure.com/','_blank')">Crib Portal</button>
+                        <button class="policy-button" onclick="openPDF('Policy Handguide_Crib.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'crib')"></label>
+                        <button class="policy-button view-excel-button" id="view-crib" onclick="viewExcel('crib')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-crib"><span id="date-crib"></span></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Daily Hospicash -->
+        <div class="category-section" data-category="hospicash">
+            <h2 class="category-title"><span class="category-icon">🏨</span>Daily Hospicash</h2>
+            <div class="policy-grid">
+                <div class="policy-card" data-policy-id="saathealth" data-keywords="saathealth daily hospicash hospitalization 3000 icu">
+                    <div class="policy-header">
+                        <div class="policy-name">Saathealth</div>
+                        <button class="spoc-button" onclick="showSPOC('saathealth')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">Daily Hospicash</span><span class="insurer-badge">Magma General Insurance</span></div>
+                    <div class="policy-description">Fixed ₹3,000/day for hospitalization (double for ICU), irrespective of actual bills. Subject to 1-day deductible.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="window.open('https://www.admin.healthysure.in/client-manager/corporate?limit=10&offset=0','_blank')">HS Portal</button>
+                        <button class="policy-button" onclick="openPDF('Saathealth_Handguide_Magma_hindi.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'saathealth')"></label>
+                        <button class="policy-button view-excel-button" id="view-saathealth" onclick="viewExcel('saathealth')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-saathealth"><span id="date-saathealth"></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pet Insurance -->
+        <div class="category-section" data-category="pet">
+            <h2 class="category-title"><span class="category-icon">🐾</span>Pet Insurance</h2>
+            <div class="policy-grid">
+                <div class="policy-card" data-policy-id="mellowcare" data-keywords="mellowcare pet insurance surgery hospitalization opd veterinary">
+                    <div class="policy-header">
+                        <div class="policy-name">Mellowcare</div>
+                        <button class="spoc-button" onclick="showSPOC('mellowcare')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">Pet Insurance</span><span class="insurer-badge">Universal Sompo</span></div>
+                    <div class="policy-description">Covers surgery, hospitalization (illness/injury), and OPD veterinary expenses for pets, subject to policy terms.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="openPDF('Policy Handguide_Mellowcare.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'mellowcare')"></label>
+                        <button class="policy-button view-excel-button" id="view-mellowcare" onclick="viewExcel('mellowcare')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-mellowcare"><span id="date-mellowcare"></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Solar Panel Insurance — Aerem (Netzero) COMBINED -->
+        <div class="category-section" data-category="solar">
+            <h2 class="category-title"><span class="category-icon">☀️</span>Solar Panel Insurance</h2>
+            <div class="policy-grid">
+
+                <!-- AEREM COMBINED CARD -->
+                <div class="policy-card" data-policy-id="aerem" data-keywords="aerem netzero solar panel fire earthquake storm flood tsunami burglary commercial residential industrial">
+                    <div class="policy-header">
+                        <div class="policy-name">Aerem (Netzero)</div>
+                        <button class="spoc-button" onclick="showSPOC('aerem')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">Solar Panel Insurance</span><span class="insurer-badge">Tata AIG</span></div>
+                    <div class="policy-description">Comprehensive protection for solar panels against fire and allied perils (earthquake, storm, cyclone, flood, tsunami), terrorist acts, and burglary. Available across Commercial, Residential, and Industrial plans.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="openPDF('PH - Commercial.pdf')">Commercial</button>
+                        <button class="policy-button" onclick="openPDF('PH - Residential.pdf')">Residential</button>
+                        <button class="policy-button" onclick="openPDF('PH - Industrial.pdf')">Industrial</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'aerem')"></label>
+                        <button class="policy-button view-excel-button" id="view-aerem" onclick="viewExcel('aerem')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-aerem"><span id="date-aerem"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="creditfair-commercial" data-keywords="creditfair commercial solar panel fire earthquake storm flood tsunami burglary icici">
+                    <div class="policy-header">
+                        <div class="policy-name">Creditfair – Commercial</div>
+                        <button class="spoc-button" onclick="showSPOC('creditfair-commercial')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">Solar Panel Insurance</span><span class="insurer-badge">ICICI Lombard</span></div>
+                    <div class="policy-description">Comprehensive commercial solar panel coverage including terrorism and violent break-in protection.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="openPDF('CF Handguide_Commercial.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'creditfair-commercial')"></label>
+                        <button class="policy-button view-excel-button" id="view-creditfair-commercial" onclick="viewExcel('creditfair-commercial')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-creditfair-commercial"><span id="date-creditfair-commercial"></span></div>
+                </div>
+
+                <div class="policy-card" data-policy-id="creditfair-residential" data-keywords="creditfair residential solar panel fire earthquake storm flood tsunami burglary icici">
+                    <div class="policy-header">
+                        <div class="policy-name">Creditfair – Residential</div>
+                        <button class="spoc-button" onclick="showSPOC('creditfair-residential')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">Solar Panel Insurance</span><span class="insurer-badge">ICICI Lombard</span></div>
+                    <div class="policy-description">Residential solar panel protection covering natural disasters and break-ins.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="openPDF('CF Handguide_Residential.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'creditfair-residential')"></label>
+                        <button class="policy-button view-excel-button" id="view-creditfair-residential" onclick="viewExcel('creditfair-residential')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-creditfair-residential"><span id="date-creditfair-residential"></span></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Vehicle Insurance -->
+        <div class="category-section" data-category="vehicle">
+            <h2 class="category-title"><span class="category-icon">🛵</span>Vehicle Insurance</h2>
+            <div class="policy-grid">
+                <div class="policy-card" data-policy-id="eveez-2wheeler" data-keywords="eveez 2 wheeler two vehicle theft accident fire burglary damage">
+                    <div class="policy-header">
+                        <div class="policy-name">Eveez – 2 Wheeler</div>
+                        <button class="spoc-button" onclick="showSPOC('eveez-2wheeler')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">All Risk Cover</span><span class="insurer-badge">Bajaj Capital / ICICI Lombard</span></div>
+                    <div class="policy-description">2-Wheeler Insurance – Covers theft, accident, fire, burglary, and accidental damage. Sum insured as per cost of asset.</div>
+                    <div class="button-group">
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'eveez-2wheeler')"></label>
+                        <button class="policy-button view-excel-button" id="view-eveez-2wheeler" onclick="viewExcel('eveez-2wheeler')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-eveez-2wheeler"><span id="date-eveez-2wheeler"></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Credit Linked Life Insurance -->
+        <div class="category-section" data-category="credit-life">
+            <h2 class="category-title"><span class="category-icon">💳</span>Credit Linked Life Insurance</h2>
+            <div class="policy-grid">
+                <div class="policy-card" data-policy-id="kredit-venture" data-keywords="kredit venture credit linked life insurance loan death family">
+                    <div class="policy-header">
+                        <div class="policy-name">Kredit Venture</div>
+                        <button class="spoc-button" onclick="showSPOC('kredit-venture')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">Credit Linked Life</span><span class="insurer-badge">Credit Access Life</span></div>
+                    <div class="policy-description">Life policy linked to a loan — insurer pays off outstanding loan on borrower's death, protecting the family.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="openPDF('KV Handguide_CLI.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'kredit-venture')"></label>
+                        <button class="policy-button view-excel-button" id="view-kredit-venture" onclick="viewExcel('kredit-venture')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-kredit-venture"><span id="date-kredit-venture"></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cyber Insurance -->
+        <div class="category-section" data-category="cyber">
+            <h2 class="category-title"><span class="category-icon">🔒</span>Cyber Insurance</h2>
+            <div class="policy-grid">
+                <div class="policy-card" data-policy-id="bobble-ai" data-keywords="bobble cyber insurance fraud bullying stalking reputation annual monthly quarterly">
+                    <div class="policy-header">
+                        <div class="policy-name">Bobble.ai</div>
+                        <button class="spoc-button" onclick="showSPOC('bobble-ai')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">Cyber Insurance</span><span class="insurer-badge">Universal Sompo</span></div>
+                    <div class="policy-description">Annual plan: theft of funds, online fraud, cyber bullying/stalking/reputation. Monthly &amp; Quarterly: theft of funds only.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="openPDF('Handguide_Annual_Bobble.pdf')">Annual</button>
+                        <button class="policy-button" onclick="openPDF('Handguide_Monthly_Bobble.pdf')">Monthly</button>
+                        <button class="policy-button" onclick="openPDF('Handguide_Quarterly_Bobble.pdf')">Quarterly</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'bobble-ai')"></label>
+                        <button class="policy-button view-excel-button" id="view-bobble-ai" onclick="viewExcel('bobble-ai')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-bobble-ai"><span id="date-bobble-ai"></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fire Insurance -->
+        <div class="category-section" data-category="fire">
+            <h2 class="category-title"><span class="category-icon">🔥</span>Fire Insurance</h2>
+            <div class="policy-grid">
+                <div class="policy-card" data-policy-id="batterysmart-fire" data-keywords="batterysmart fire insurance battery swapping stations earthquake storm flood tsunami">
+                    <div class="policy-header">
+                        <div class="policy-name">Batterysmart</div>
+                        <button class="spoc-button" onclick="showSPOC('batterysmart-fire')">SPOC Details</button>
+                    </div>
+                    <div class="badges"><span class="policy-type">Fire Insurance</span><span class="insurer-badge">ICICI Lombard</span></div>
+                    <div class="policy-description">Covers loss or damage to battery swapping stations due to fire and allied perils including earthquake, storm, cyclone, flood, tsunami.</div>
+                    <div class="button-group">
+                        <button class="policy-button" onclick="openPDF('Policy Handguide.pdf')">View Handguide</button>
+                        <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'batterysmart-fire')"></label>
+                        <button class="policy-button view-excel-button" id="view-batterysmart-fire" onclick="viewExcel('batterysmart-fire')" disabled>View Excel</button>
+                    </div>
+                    <div class="excel-info" id="info-batterysmart-fire"><span id="date-batterysmart-fire"></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CUSTOM POLICIES SECTION — filled dynamically -->
+        <div class="category-section" data-category="custom" id="customPoliciesSection" style="display:none;">
+            <h2 class="category-title"><span class="category-icon">➕</span>Custom Policies</h2>
+            <div class="policy-grid" id="customPoliciesGrid"></div>
+        </div>
+
+        <div class="no-results" id="noResults" style="display:none;">
+            <div style="font-size:3em;margin-bottom:16px;">🔍</div>
+            <h3>No policies found</h3>
+            <p>Try adjusting your search terms</p>
+        </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number" id="totalPoliciesCount">25</div>
+            <div class="stat-label">Total Policies</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">8</div>
+            <div class="stat-label">Categories</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" id="uploadedCount">0</div>
+            <div class="stat-label">Excel Files Uploaded</div>
+        </div>
+        <div class="stat-item" style="grid-column: span 1;">
+            <!-- Storage Meter -->
+            <div id="storageMeter" style="display:none;flex-direction:column;align-items:center;gap:6px;width:100%;">
+                <div style="width:100%;background:#e2e6f0;border-radius:20px;height:10px;overflow:hidden;">
+                    <div id="storageMeterBar" style="height:100%;width:0%;border-radius:20px;transition:width 0.4s,background 0.4s;background:#00c896;"></div>
+                </div>
+                <div id="storageMeterText" style="font-size:0.78em;color:var(--muted);text-align:center;"></div>
+                <button onclick="clearAllExcelData()" style="background:none;border:1.5px solid #e84393;color:#e84393;padding:4px 12px;border-radius:6px;font-size:0.78em;font-weight:bold;cursor:pointer;font-family:Arial;margin-top:2px;">🗑️ Clear Excel Data</button>
+            </div>
+            <div class="stat-label" style="margin-top:4px;">Browser Storage</div>
+        </div>
+    </div>
+</div>
+
+<!-- FLOATING ADD BUTTON -->
+<button class="fab-add" onclick="openAddPolicy()" title="Add New Policy">+ Add New Policy</button>
+
+<!-- ======================== SPOC MODAL ======================== -->
+<div id="spocModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="spocModalTitle">SPOC Details</h2>
+            <button class="close-button" onclick="closeSPOCModal()">×</button>
+        </div>
+        <div class="modal-body">
+            <div id="spocViewMode">
+                <button class="edit-toggle-btn" onclick="toggleEditMode()">✏️ Edit SPOC Details</button>
+                <div class="spoc-section">
+                    <h3 id="spocPolicyName"></h3>
+                    <div class="spoc-view-row">
+                        <div class="spoc-label">Insurer:</div>
+                        <div class="spoc-value" id="spocInsurer"></div>
+                    </div>
+                    <div class="spoc-view-row" id="spocContactRow">
+                        <div class="spoc-label">SPOC Contacts:</div>
+                        <div class="spoc-value" id="spocContacts"></div>
+                    </div>
+                    <div class="spoc-view-row" id="spocEmailRow">
+                        <div class="spoc-label">Email Addresses:</div>
+                        <div class="spoc-value" id="spocEmails"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="spoc-edit-form" id="spocEditForm">
+                <button class="edit-toggle-btn save" onclick="saveSPOC()">💾 Save Changes</button>
+                <button class="edit-toggle-btn" onclick="cancelEdit()" style="background:#888;margin-left:8px;">Cancel</button>
+                <div class="spoc-section" style="margin-top:16px;">
+                    <div class="form-group">
+                        <label>Insurer Name</label>
+                        <input type="text" id="editInsurer" placeholder="e.g. Magma General Insurance">
+                    </div>
+                    <div class="form-group">
+                        <label>SPOC Contact Details (one per line, format: Name - Phone)</label>
+                        <textarea id="editContacts" rows="4" placeholder="e.g. Rahul Sharma - 9876543210&#10;Priya Mehta - 8765432109"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Addresses (one per line)</label>
+                        <textarea id="editEmails" rows="3" placeholder="e.g. rahul.sharma@insurer.com&#10;priya.mehta@insurer.com"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ======================== EXCEL MODAL ======================== -->
+<div id="excelModal" class="modal">
+    <div class="modal-content wide">
+        <div class="modal-header">
+            <h2 id="modalTitle">Excel Data Viewer</h2>
+            <button class="close-button" onclick="closeModal()">×</button>
+        </div>
+        <div class="excel-search-bar">
+            <input type="text" id="excelSearchInput" class="search-input" placeholder="🔍 Search in Excel data..." style="margin:0;">
+            <div class="search-results-info" id="searchResults"></div>
+        </div>
+        <div class="modal-body">
+            <div id="excelViewer" class="excel-viewer"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ======================== ADD NEW POLICY MODAL ======================== -->
+<div id="addPolicyModal" class="modal">
+    <div class="add-modal-content">
+        <div class="modal-header">
+            <h2>➕ Add New Policy</h2>
+            <button class="close-button" onclick="closeAddPolicy()">×</button>
+        </div>
+
+        <!-- Step tabs -->
+        <div class="step-indicator">
+            <div class="step-tab active" id="tab1">1. Policy Info</div>
+            <div class="step-tab" id="tab2">2. Handguide / PDF</div>
+            <div class="step-tab" id="tab3">3. SPOC Details</div>
+        </div>
+
+        <!-- STEP 1: Basic Info -->
+        <div class="step-content active" id="step1">
+            <div class="form-group">
+                <label>Policy / Client Name <span class="required">*</span></label>
+                <input type="text" id="newName" placeholder="e.g. Rapido, Zepto Delivery...">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Coverage Type <span class="required">*</span></label>
+                    <select id="newType">
+                        <option value="">-- Select --</option>
+                        <option>GPA</option>
+                        <option>GHI</option>
+                        <option>GHI &amp; GPA</option>
+                        <option>Daily Hospicash</option>
+                        <option>Pet Insurance</option>
+                        <option>Solar Panel Insurance</option>
+                        <option>Vehicle Insurance</option>
+                        <option>Credit Linked Life</option>
+                        <option>Cyber Insurance</option>
+                        <option>Fire Insurance</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Insurer Name <span class="required">*</span></label>
+                    <input type="text" id="newInsurer" placeholder="e.g. Magma, ICICI Lombard...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Policy Description</label>
+                <textarea id="newDesc" rows="3" placeholder="Short description of what this policy covers..."></textarea>
+            </div>
+        </div>
+
+        <!-- STEP 2: Handguide PDF Upload -->
+        <div class="step-content" id="step2">
+
+            <!-- Option selector tabs -->
+            <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;">
+                <button class="hg-opt-btn active" id="hgOpt1" onclick="switchHandguideOption(1)">📁 Upload PDF File</button>
+                <button class="hg-opt-btn" id="hgOpt2" onclick="switchHandguideOption(2)">🔗 Paste a Link / URL</button>
+                <button class="hg-opt-btn" id="hgOpt3" onclick="switchHandguideOption(3)">⏭️ Skip for now</button>
+            </div>
+
+            <!-- OPTION 1: Upload PDF from computer -->
+            <div id="hgOption1">
+                <div style="background:#e8f4ff;border-left:4px solid #3b6ef5;padding:12px 14px;border-radius:8px;font-size:0.88em;color:#1a2744;margin-bottom:14px;">
+                    <strong>📁 Upload from your computer</strong><br>
+                    PDF, image ya koi bhi file — seedha apni machine se upload karo. Browser mein save ho jaayega. Ek se zyada files bhi upload kar sakte ho (jaise Commercial + Residential alag alag buttons).
+                </div>
+                <div class="handguide-upload-zone">
+                    <input type="file" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" multiple onchange="handlePDFUpload(event)">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Click here to choose file(s)</div>
+                    <div class="upload-sub">PDF, PNG, JPG supported &nbsp;|&nbsp; Multiple files allowed</div>
+                </div>
+                <div class="multi-pdf-list" id="pdfList"></div>
+            </div>
+
+            <!-- OPTION 2: Paste a URL/Link -->
+            <div id="hgOption2" style="display:none;">
+                <div style="background:#fff8e1;border-left:4px solid #f0a500;padding:12px 14px;border-radius:8px;font-size:0.88em;color:#7a4a00;margin-bottom:14px;">
+                    <strong>🔗 Paste a Google Drive / SharePoint / any link</strong><br>
+                    Agar handguide already online hai (Google Drive, SharePoint, Dropbox, website) toh link paste karo. Click karne par woh link seedha open hoga.
+                </div>
+                <div id="linkList"></div>
+                <div style="display:flex;gap:10px;align-items:flex-end;margin-top:8px;">
+                    <div style="flex:1;">
+                        <label style="font-size:0.85em;font-weight:bold;color:var(--primary);display:block;margin-bottom:5px;">Button Label (e.g. "View Handguide", "Commercial")</label>
+                        <input type="text" id="newLinkLabel" placeholder="View Handguide" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:Arial;font-size:0.9em;outline:none;">
+                    </div>
+                    <div style="flex:2;">
+                        <label style="font-size:0.85em;font-weight:bold;color:var(--primary);display:block;margin-bottom:5px;">URL / Link</label>
+                        <input type="url" id="newLinkUrl" placeholder="https://drive.google.com/file/..." style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:Arial;font-size:0.9em;outline:none;">
+                    </div>
+                    <button onclick="addHandguideLink()" style="background:var(--accent);color:white;border:none;padding:10px 16px;border-radius:8px;font-weight:bold;cursor:pointer;font-family:Arial;white-space:nowrap;">+ Add</button>
+                </div>
+            </div>
+
+            <!-- OPTION 3: Skip -->
+            <div id="hgOption3" style="display:none;">
+                <div style="background:#f0fff8;border-left:4px solid var(--green);padding:18px;border-radius:10px;text-align:center;">
+                    <div style="font-size:2.5em;margin-bottom:10px;">✅</div>
+                    <div style="font-weight:bold;font-size:1em;color:#007a5e;">Handguide baad mein add kar sakte ho!</div>
+                    <div style="font-size:0.87em;color:var(--muted);margin-top:6px;">Card save ho jaayega. Aage jaake agar handguide milti hai toh "Edit" karke add kar lena.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- STEP 3: SPOC Details -->
+        <div class="step-content" id="step3">
+            <div class="form-group">
+                <label>SPOC Contact Details</label>
+                <textarea id="newContacts" rows="3" placeholder="One per line:&#10;Rahul Sharma - 9876543210&#10;Priya Mehta - 8765432109"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Email Addresses</label>
+                <textarea id="newEmails" rows="2" placeholder="One per line:&#10;rahul.sharma@insurer.com"></textarea>
+            </div>
+            <div style="background:#fff8e1;border:1.5px solid #f0a500;border-radius:10px;padding:14px;font-size:0.88em;color:#7a4a00;">
+                <strong>✅ Ready to save!</strong> Review your details above and click <strong>Save Policy</strong>.
+                The new card will appear immediately in the <strong>Custom Policies</strong> section.
+            </div>
+        </div>
+
+        <!-- Nav buttons -->
+        <div class="nav-buttons">
+            <button class="btn-back" id="backBtn" onclick="prevStep()" style="visibility:hidden;">← Back</button>
+            <span style="font-size:0.85em;color:var(--muted);" id="stepLabel">Step 1 of 3</span>
+            <div>
+                <button class="btn-next" id="nextBtn" onclick="nextStep()">Next →</button>
+                <button class="btn-save" id="saveBtn" onclick="saveNewPolicy()" style="display:none;">💾 Save Policy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+// ============================================================
+//  DEFAULT SPOC DATA (can be overridden by edits in localStorage)
+// ============================================================
+const DEFAULT_SPOC = {
+    'pronto':                 { insurer:'Magma General Insurance', contacts:'Dr. Satyandra Yadav - 8104413782\nVijitha Bolar - 9322735553', emails:'samruddhi.samant@magmainsurance.com\nsatyandar.yadav@magmainsurance.com\nvijitha.bolar@magmainsurance.com' },
+    'score10':                { insurer:'Magma General Insurance', contacts:'Dr. Satyandra Yadav - 8104413782\nVijitha Bolar - 9322735553', emails:'samruddhi.samant@magmainsurance.com\nsatyandar.yadav@magmainsurance.com\nvijitha.bolar@magmainsurance.com' },
+    'dvara-money':            { insurer:'Magma General Insurance', contacts:'Dr. Satyandra Yadav - 8104413782\nVijitha Bolar - 9322735553', emails:'samruddhi.samant@magmainsurance.com\nsatyandar.yadav@magmainsurance.com\nvijitha.bolar@magmainsurance.com' },
+    'apnamart':               { insurer:'Magma General Insurance', contacts:'Dr. Satyandra Yadav - 8104413782\nVijitha Bolar - 9322735553', emails:'samruddhi.samant@magmainsurance.com\nsatyandar.yadav@magmainsurance.com\nvijitha.bolar@magmainsurance.com' },
+    'dealshare':              { insurer:'Magma General Insurance', contacts:'Dr. Satyandra Yadav - 8104413782\nVijitha Bolar - 9322735553', emails:'samruddhi.samant@magmainsurance.com\nsatyandar.yadav@magmainsurance.com\nvijitha.bolar@magmainsurance.com' },
+    'eveez-gpa':              { insurer:'Magma General Insurance', contacts:'Dr. Satyandra Yadav - 8104413782\nVijitha Bolar - 9322735553', emails:'samruddhi.samant@magmainsurance.com\nsatyandar.yadav@magmainsurance.com\nvijitha.bolar@magmainsurance.com' },
+    'batterysmart-drivers':   { insurer:'Magma General Insurance', contacts:'Dr. Satyandra Yadav - 8104413782\nVijitha Bolar - 9322735553', emails:'samruddhi.samant@magmainsurance.com\nsatyandar.yadav@magmainsurance.com\nvijitha.bolar@magmainsurance.com' },
+    'batterysmart-operators': { insurer:'Magma General Insurance', contacts:'Dr. Satyandra Yadav - 8104413782\nVijitha Bolar - 9322735553', emails:'samruddhi.samant@magmainsurance.com\nsatyandar.yadav@magmainsurance.com\nvijitha.bolar@magmainsurance.com' },
+    'blitz':                  { insurer:'Reliance General Insurance', contacts:'Anshu Pasricha - 9268277533', emails:'ANSHU.PASRICHA@indusindinsurance.com' },
+    'swasth-udyog':           { insurer:'Manipal Cigna', contacts:'Jyotsna Jadhav - 9986031369\nVishal Jaiswal - 9742754063\nAkansha Mishra - 9035674464', emails:'' },
+    'quick-couriers':         { insurer:'Manipal Cigna', contacts:'Jyotsna Jadhav - 9986031369\nVishal Jaiswal - 9742754063\nAkansha Mishra - 9035674464', emails:'' },
+    'scripbox':               { insurer:'Care Health', contacts:'Naresh Gaurav - 7021425172\nPankaj Chandila - 8527736600', emails:'' },
+    'tushil':                 { insurer:'Care Health', contacts:'Naresh Gaurav - 7021425172\nPankaj Chandila - 8527736600', emails:'' },
+    'bayleaf':                { insurer:'Magma General Insurance', contacts:'Dr. Satyandra Yadav - 8104413782\nVijitha Bolar - 9322735553', emails:'samruddhi.samant@magmainsurance.com\nsatyandar.yadav@magmainsurance.com\nvijitha.bolar@magmainsurance.com' },
+    'crib':                   { insurer:'Care Health', contacts:'Naresh Gaurav - 7021425172\nPankaj Chandila - 8527736600', emails:'' },
+    'saathealth':             { insurer:'Magma General Insurance', contacts:'Dr. Satyandra Yadav - 8104413782\nVijitha Bolar - 9322735553', emails:'samruddhi.samant@magmainsurance.com\nsatyandar.yadav@magmainsurance.com\nvijitha.bolar@magmainsurance.com' },
+    'mellowcare':             { insurer:'Universal Sompo', contacts:'Saksham Dogra', emails:'Saksham.Dogra@universalsompo.com' },
+    'aerem':                  { insurer:'Tata AIG', contacts:'N/A', emails:'' },
+    'creditfair-commercial':  { insurer:'ICICI Lombard', contacts:'Stephen Nadar - 8451052719', emails:'stephenson.nadar@icicilombard.com' },
+    'creditfair-residential': { insurer:'ICICI Lombard', contacts:'Stephen Nadar - 8451052719', emails:'stephenson.nadar@icicilombard.com' },
+    'eveez-2wheeler':         { insurer:'Bajaj Capital / ICICI Lombard', contacts:'Akash (Bajaj) - 8920622518', emails:'giclaims@bajajcapital.com\nakash.chaturvedi@bajajcapital.com' },
+    'kredit-venture':         { insurer:'Credit Access Life', contacts:'N/A', emails:'' },
+    'bobble-ai':              { insurer:'Universal Sompo', contacts:'Saksham Dogra - 8627090944', emails:'Saksham.Dogra@universalsompo.com' },
+    'batterysmart-fire':      { insurer:'ICICI Lombard', contacts:'Stephen Nadar - 8451052719', emails:'stephenson.nadar@icicilombard.com' }
+};
+
+// ============================================================
+//  STATE
+// ============================================================
+let excelStorage = {};
+let spocOverrides = {};
+let currentPolicyId = null;
+let isEditing = false;
+
+// ============================================================
+//  INIT
+// ============================================================
+window.addEventListener('DOMContentLoaded', () => {
+    // Load Excel data — per-policy keys (lightweight, no overflow risk)
+    try {
+        const idx = getExcelIndex();
+        idx.forEach(id => {
+            try {
+                const raw = localStorage.getItem('affExcel_' + id);
+                if (raw) excelStorage[id] = JSON.parse(raw);
+            } catch(e) {}
+        });
+    } catch(e) {}
+
+    // Legacy: support old single-blob format
+    try {
+        const legacy = localStorage.getItem('affinityExcelStorage');
+        if (legacy) {
+            const old = JSON.parse(legacy);
+            Object.keys(old).forEach(id => {
+                if (!excelStorage[id]) excelStorage[id] = old[id];
+            });
+        }
+    } catch(e) {}
+
+    // Load SPOC overrides
+    try {
+        const overrides = localStorage.getItem('affinitySPOCOverrides');
+        if (overrides) spocOverrides = JSON.parse(overrides);
+    } catch(e) {}
+
+    // Load custom policies (NO PDF base64 stored — links only)
+    try {
+        const cp = localStorage.getItem('affinityCustomPolicies');
+        if (cp) { customPolicies = JSON.parse(cp); renderAllCustomCards(); }
+    } catch(e) {}
+
+    // Restore Excel buttons
+    Object.keys(excelStorage).forEach(id => {
+        const btn = document.getElementById(`view-${id}`);
+        const info = document.getElementById(`info-${id}`);
+        const date = document.getElementById(`date-${id}`);
+        if (btn && info && date) {
+            btn.disabled = false;
+            info.classList.add('visible');
+            date.textContent = `✓ ${excelStorage[id].fileName} — ${excelStorage[id].uploadDate}`;
+        }
+    });
+
+    updateUploadCount();
+    updateStorageMeter();
+});
+
+// ============================================================
+//  SPOC HELPERS
+// ============================================================
+function getSPOC(policyId) {
+    const def = DEFAULT_SPOC[policyId] || { insurer:'N/A', contacts:'N/A', emails:'' };
+    const ov = spocOverrides[policyId] || {};
+    return {
+        insurer:  ov.insurer  !== undefined ? ov.insurer  : def.insurer,
+        contacts: ov.contacts !== undefined ? ov.contacts : def.contacts,
+        emails:   ov.emails   !== undefined ? ov.emails   : def.emails
+    };
+}
+
+function getPolicyName(policyId) {
+    const card = document.querySelector(`[data-policy-id="${policyId}"]`);
+    return card ? card.querySelector('.policy-name').textContent.trim() : policyId;
+}
+
+// ============================================================
+//  SHOW SPOC MODAL
+// ============================================================
+function showSPOC(policyId) {
+    currentPolicyId = policyId;
+    isEditing = false;
+    renderSPOCView();
+    document.getElementById('spocModal').classList.add('active');
+}
+
+function renderSPOCView() {
+    const spoc = getSPOC(currentPolicyId);
+    document.getElementById('spocModalTitle').textContent = 'SPOC Details – ' + getPolicyName(currentPolicyId);
+    document.getElementById('spocPolicyName').textContent = getPolicyName(currentPolicyId);
+    document.getElementById('spocInsurer').textContent = spoc.insurer || 'N/A';
+
+    const contactsEl = document.getElementById('spocContacts');
+    contactsEl.textContent = (spoc.contacts && spoc.contacts.trim()) ? spoc.contacts : '—';
+
+    const emailsEl = document.getElementById('spocEmails');
+    emailsEl.textContent = (spoc.emails && spoc.emails.trim()) ? spoc.emails : '—';
+
+    document.getElementById('spocViewMode').style.display = 'block';
+    document.getElementById('spocEditForm').classList.remove('visible');
+}
+
+// ============================================================
+//  TOGGLE EDIT
+// ============================================================
+function toggleEditMode() {
+    const spoc = getSPOC(currentPolicyId);
+    document.getElementById('editInsurer').value  = spoc.insurer  || '';
+    document.getElementById('editContacts').value = spoc.contacts || '';
+    document.getElementById('editEmails').value   = spoc.emails   || '';
+
+    document.getElementById('spocViewMode').style.display = 'none';
+    document.getElementById('spocEditForm').classList.add('visible');
+}
+
+function cancelEdit() {
+    document.getElementById('spocViewMode').style.display = 'block';
+    document.getElementById('spocEditForm').classList.remove('visible');
+}
+
+function saveSPOC() {
+    if (!currentPolicyId) return;
+    spocOverrides[currentPolicyId] = {
+        insurer:  document.getElementById('editInsurer').value.trim(),
+        contacts: document.getElementById('editContacts').value.trim(),
+        emails:   document.getElementById('editEmails').value.trim()
+    };
+    try { localStorage.setItem('affinitySPOCOverrides', JSON.stringify(spocOverrides)); } catch(e) {}
+
+    // Update insurer badge on card
+    const card = document.querySelector(`[data-policy-id="${currentPolicyId}"]`);
+    if (card) {
+        const badge = card.querySelector('.insurer-badge');
+        if (badge) badge.textContent = spocOverrides[currentPolicyId].insurer;
+    }
+
+    renderSPOCView();
+    document.getElementById('spocViewMode').style.display = 'block';
+    document.getElementById('spocEditForm').classList.remove('visible');
+    showToast('SPOC details saved successfully!');
+}
+
+function closeSPOCModal() {
+    document.getElementById('spocModal').classList.remove('active');
+    currentPolicyId = null;
+}
+
+// ============================================================
+//  TOAST
+// ============================================================
+function showToast(msg) {
+    const t = document.createElement('div');
+    t.style.cssText = 'position:fixed;bottom:28px;right:28px;background:#1a2744;color:#fff;padding:14px 22px;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:0.9em;z-index:9999;box-shadow:0 8px 30px rgba(0,0,0,0.2);animation:fadeIn 0.2s;';
+    t.textContent = '✓  ' + msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 2800);
+}
+
+// ============================================================
+//  EXCEL UPLOAD / VIEW
+// ============================================================
+function handleFileUpload(event, policyId) {
+    const file = event.target.files[0];
+    if (!file) return;
+    if (!file.name.match(/\.(xlsx|xls|csv)$/i)) { alert('Please upload a valid Excel file (.xlsx, .xls, or .csv)'); return; }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const data = new Uint8Array(e.target.result);
+            const wb = XLSX.read(data, { type:'array' });
+            const sheets = {};
+            wb.SheetNames.forEach(sn => { sheets[sn] = XLSX.utils.sheet_to_json(wb.Sheets[sn], { header:1 }); });
+
+            const entry = { sheets, sheetNames: wb.SheetNames, fileName: file.name, uploadDate: new Date().toLocaleString() };
+            excelStorage[policyId] = entry;
+
+            // Save per-policy key (not one giant blob) to avoid storage overflow
+            try {
+                localStorage.setItem('affExcel_' + policyId, JSON.stringify(entry));
+                // Save index of uploaded policy IDs
+                const idx = getExcelIndex();
+                if (!idx.includes(policyId)) idx.push(policyId);
+                localStorage.setItem('affExcelIndex', JSON.stringify(idx));
+            } catch(err) {
+                showStorageWarning();
+            }
+
+            document.getElementById(`view-${policyId}`).disabled = false;
+            const info = document.getElementById(`info-${policyId}`);
+            const date = document.getElementById(`date-${policyId}`);
+            info.classList.add('visible');
+            date.textContent = `✓ ${file.name} — ${entry.uploadDate}`;
+            updateUploadCount();
+            updateStorageMeter();
+            showToast(`"${file.name}" uploaded for ${getPolicyName(policyId)}`);
+        } catch(err) {
+            alert('Error reading Excel file. Please check the file is valid.');
+        }
+    };
+    reader.readAsArrayBuffer(file);
+}
+
+function viewExcel(policyId) {
+    if (!excelStorage[policyId]) { alert('No Excel file uploaded yet.'); return; }
+    currentPolicyId = policyId;
+    const d = excelStorage[policyId];
+    const rows = d.sheets[d.sheetNames[0]];
+
+    let html = '<table class="excel-table">';
+    rows.forEach((row, ri) => {
+        html += '<tr>';
+        row.forEach(cell => {
+            const v = cell !== null && cell !== undefined ? cell : '';
+            html += ri === 0 ? `<th>${v}</th>` : `<td>${v}</td>`;
+        });
+        html += '</tr>';
+    });
+    html += '</table>';
+
+    document.getElementById('modalTitle').textContent = `${getPolicyName(policyId)} — ${d.fileName}`;
+    document.getElementById('excelViewer').innerHTML = html;
+    document.getElementById('excelSearchInput').value = '';
+    document.getElementById('searchResults').textContent = '';
+    document.getElementById('excelModal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('excelModal').classList.remove('active');
+    currentPolicyId = null;
+}
+
+// Excel in-modal search
+document.getElementById('excelSearchInput').addEventListener('input', function() {
+    const term = this.value.toLowerCase().trim();
+    const resultsEl = document.getElementById('searchResults');
+    const table = document.querySelector('.excel-table');
+    if (!table) return;
+    const rows = table.querySelectorAll('tr');
+    if (!term) {
+        rows.forEach((r,i) => { if(i>0){ r.classList.remove('hidden-row','highlight'); r.querySelectorAll('td').forEach(c=>c.innerHTML=c.textContent); } });
+        resultsEl.textContent = '';
+        return;
+    }
+    let count = 0;
+    rows.forEach((row, i) => {
+        if (i===0) return;
+        let match = false;
+        row.querySelectorAll('td').forEach(cell => {
+            const orig = cell.textContent;
+            if (orig.toLowerCase().includes(term)) {
+                match = true;
+                cell.innerHTML = orig.replace(new RegExp(`(${term})`, 'gi'), '<span class="highlight-text">$1</span>');
+            } else { cell.innerHTML = orig; }
+        });
+        if (match) { row.classList.remove('hidden-row'); row.classList.add('highlight'); count++; }
+        else { row.classList.add('hidden-row'); row.classList.remove('highlight'); }
+    });
+    resultsEl.textContent = count > 0 ? `Found ${count} row${count!==1?'s':''}` : 'No matches found';
+    resultsEl.style.color = count > 0 ? 'var(--green)' : '#e84393';
+});
+
+// ============================================================
+//  STORAGE HELPERS & METER
+// ============================================================
+function getExcelIndex() {
+    try { return JSON.parse(localStorage.getItem('affExcelIndex') || '[]'); } catch(e) { return []; }
+}
+
+function getStorageUsedKB() {
+    let total = 0;
+    for (let key in localStorage) {
+        if (localStorage.hasOwnProperty(key)) {
+            total += (localStorage.getItem(key).length * 2); // UTF-16
+        }
+    }
+    return Math.round(total / 1024);
+}
+
+function updateStorageMeter() {
+    const usedKB = getStorageUsedKB();
+    const totalKB = 5120; // 5MB typical limit
+    const pct = Math.min(100, Math.round((usedKB / totalKB) * 100));
+    const meterEl = document.getElementById('storageMeter');
+    const meterBar = document.getElementById('storageMeterBar');
+    const meterText = document.getElementById('storageMeterText');
+    if (!meterEl) return;
+    meterEl.style.display = 'flex';
+    meterBar.style.width = pct + '%';
+    meterBar.style.background = pct > 80 ? '#e84393' : pct > 60 ? '#f0a500' : '#00c896';
+    meterText.textContent = `Storage used: ${usedKB} KB / ${totalKB} KB (${pct}%)`;
+}
+
+function showStorageWarning() {
+    alert('⚠️ Browser storage is getting full!\n\nKya karo:\n1. Purane Excel data clear karo (Clear Data button se)\n2. Sirf zaruri data rakho\n3. PDF ke liye Google Drive links use karo (upload mat karo)');
+}
+
+function clearAllExcelData() {
+    if (!confirm('Sab Excel data delete ho jaayega. Sure ho?')) return;
+    const idx = getExcelIndex();
+    idx.forEach(id => localStorage.removeItem('affExcel_' + id));
+    localStorage.removeItem('affExcelIndex');
+    localStorage.removeItem('affinityExcelStorage'); // clear legacy too
+    excelStorage = {};
+    // Reset all view buttons
+    document.querySelectorAll('.view-excel-button').forEach(btn => btn.disabled = true);
+    document.querySelectorAll('.excel-info').forEach(el => el.classList.remove('visible'));
+    updateUploadCount();
+    updateStorageMeter();
+    showToast('Sab Excel data clear ho gaya!');
+}
+
+
+
+function updateUploadCount() {
+    document.getElementById('uploadedCount').textContent = Object.keys(excelStorage).length;
+}
+
+function openPDF(fn) { window.open(fn, '_blank'); }
+
+// ============================================================
+//  MAIN SEARCH
+// ============================================================
+document.getElementById('searchInput').addEventListener('input', function() {
+    const term = this.value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.policy-card');
+    const sections = document.querySelectorAll('.category-section');
+    const noRes = document.getElementById('noResults');
+    if (!term) {
+        cards.forEach(c => c.style.display = 'block');
+        sections.forEach(s => s.style.display = 'block');
+        noRes.style.display = 'none';
+        return;
+    }
+    let visible = 0;
+    cards.forEach(card => {
+        const kw = card.dataset.keywords.toLowerCase();
+        const name = card.querySelector('.policy-name').textContent.toLowerCase();
+        const type = card.querySelector('.policy-type').textContent.toLowerCase();
+        const desc = card.querySelector('.policy-description').textContent.toLowerCase();
+        const matches = kw.includes(term) || name.includes(term) || type.includes(term) || desc.includes(term);
+        card.style.display = matches ? 'block' : 'none';
+        if (matches) visible++;
+    });
+    sections.forEach(s => {
+        const vis = s.querySelectorAll('.policy-card[style="display: block;"]').length;
+        s.style.display = vis > 0 ? 'block' : 'none';
+    });
+    noRes.style.display = visible === 0 ? 'block' : 'none';
+});
+
+// Close modals on overlay click / Escape
+window.onclick = e => {
+    if (e.target === document.getElementById('excelModal')) closeModal();
+    if (e.target === document.getElementById('spocModal')) closeSPOCModal();
+    if (e.target === document.getElementById('addPolicyModal')) closeAddPolicy();
+};
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal(); closeSPOCModal(); closeAddPolicy(); }
+});
+
+// ============================================================
+//  ADD NEW POLICY — State
+// ============================================================
+let currentStep = 1;
+let newPolicyPDFs = [];
+let newPolicyLinks = [];
+let currentHandguideOption = 1;
+let customPolicies = [];
+
+// ============================================================
+//  OPEN / CLOSE ADD POLICY MODAL
+// ============================================================
+function openAddPolicy() {
+    currentStep = 1;
+    newPolicyPDFs = [];
+    newPolicyLinks = [];
+    currentHandguideOption = 1;
+    // Reset form
+    ['newName','newInsurer','newDesc','newContacts','newEmails','newLinkLabel','newLinkUrl'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    document.getElementById('newType').value = '';
+    document.getElementById('pdfList').innerHTML = '';
+    document.getElementById('linkList').innerHTML = '';
+    // Reset handguide option UI
+    switchHandguideOption(1);
+    updateStepUI();
+    document.getElementById('addPolicyModal').classList.add('active');
+}
+
+function closeAddPolicy() {
+    document.getElementById('addPolicyModal').classList.remove('active');
+}
+
+// ============================================================
+//  STEP NAVIGATION
+// ============================================================
+function updateStepUI() {
+    for (let i = 1; i <= 3; i++) {
+        document.getElementById(`step${i}`).classList.toggle('active', i === currentStep);
+        const tab = document.getElementById(`tab${i}`);
+        tab.classList.remove('active', 'done');
+        if (i === currentStep) tab.classList.add('active');
+        if (i < currentStep) tab.classList.add('done');
+    }
+    document.getElementById('stepLabel').textContent = `Step ${currentStep} of 3`;
+    document.getElementById('backBtn').style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+    document.getElementById('nextBtn').style.display = currentStep === 3 ? 'none' : 'inline-block';
+    document.getElementById('saveBtn').style.display = currentStep === 3 ? 'inline-block' : 'none';
+}
+
+function nextStep() {
+    if (currentStep === 1) {
+        if (!document.getElementById('newName').value.trim()) { showToast('⚠️ Policy name is required!'); return; }
+        if (!document.getElementById('newType').value) { showToast('⚠️ Please select a coverage type!'); return; }
+        if (!document.getElementById('newInsurer').value.trim()) { showToast('⚠️ Insurer name is required!'); return; }
+    }
+    if (currentStep < 3) { currentStep++; updateStepUI(); }
+}
+
+function prevStep() {
+    if (currentStep > 1) { currentStep--; updateStepUI(); }
+}
+
+// ============================================================
+//  HANDGUIDE OPTION SWITCHING
+// ============================================================
+function switchHandguideOption(opt) {
+    currentHandguideOption = opt;
+    [1,2,3].forEach(i => {
+        document.getElementById(`hgOption${i}`).style.display = i === opt ? 'block' : 'none';
+        document.getElementById(`hgOpt${i}`).classList.toggle('active', i === opt);
+    });
+}
+
+// ============================================================
+//  PDF UPLOAD HANDLING
+// ============================================================
+function handlePDFUpload(event) {
+    const files = Array.from(event.target.files);
+    files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            newPolicyPDFs.push({ label: file.name.replace(/\.[^.]+$/, ''), dataUrl: e.target.result, filename: file.name });
+            renderPDFList();
+        };
+        reader.readAsDataURL(file);
+    });
+    event.target.value = '';
+}
+
+function renderPDFList() {
+    const list = document.getElementById('pdfList');
+    if (newPolicyPDFs.length === 0) { list.innerHTML = ''; return; }
+    list.innerHTML = '<div style="margin-top:12px;font-size:0.85em;color:var(--muted);margin-bottom:6px;font-weight:bold;">Uploaded files — aap button ka naam bhi change kar sakte ho:</div>' +
+        newPolicyPDFs.map((pdf, i) => `
+        <div class="multi-pdf-item">
+            <span style="font-size:1.2em;">📄</span>
+            <span class="pdf-name">${pdf.filename}</span>
+            <input type="text" value="${pdf.label}" placeholder="Button label" oninput="newPolicyPDFs[${i}].label=this.value" style="max-width:160px;padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-size:0.82em;font-family:Arial;">
+            <button class="remove-pdf" onclick="removePDF(${i})" title="Remove">✕</button>
+        </div>
+    `).join('');
+}
+
+function removePDF(index) {
+    newPolicyPDFs.splice(index, 1);
+    renderPDFList();
+}
+
+// ============================================================
+//  LINK HANDLING
+// ============================================================
+function addHandguideLink() {
+    const label = document.getElementById('newLinkLabel').value.trim() || 'View Handguide';
+    const url   = document.getElementById('newLinkUrl').value.trim();
+    if (!url) { showToast('⚠️ Please enter a URL first!'); return; }
+    newPolicyLinks.push({ label, url });
+    document.getElementById('newLinkLabel').value = '';
+    document.getElementById('newLinkUrl').value = '';
+    renderLinkList();
+}
+
+function renderLinkList() {
+    const list = document.getElementById('linkList');
+    if (newPolicyLinks.length === 0) { list.innerHTML = ''; return; }
+    list.innerHTML = newPolicyLinks.map((lnk, i) => `
+        <div class="link-item">
+            <span class="link-label">${lnk.label}</span>
+            <span class="link-url">${lnk.url}</span>
+            <button class="remove-link" onclick="removeLink(${i})" title="Remove">✕</button>
+        </div>
+    `).join('');
+}
+
+function removeLink(index) {
+    newPolicyLinks.splice(index, 1);
+    renderLinkList();
+}
+
+
+
+// ============================================================
+//  SAVE NEW POLICY
+// ============================================================
+function saveNewPolicy() {
+    const name     = document.getElementById('newName').value.trim();
+    const type     = document.getElementById('newType').value;
+    const insurer  = document.getElementById('newInsurer').value.trim();
+    const desc     = document.getElementById('newDesc').value.trim();
+    const contacts = document.getElementById('newContacts').value.trim();
+    const emails   = document.getElementById('newEmails').value.trim();
+
+    const id = 'custom-' + Date.now();
+
+    // IMPORTANT: Do NOT save base64 PDF data to localStorage — it will fill up storage!
+    // Only save the label (button name). PDF stays in memory for current session only.
+    const safePdfs = newPolicyPDFs.map(p => ({ label: p.label, filename: p.filename, dataUrl: p.dataUrl }));
+    // For localStorage, strip the heavy dataUrl
+    const storagePdfs = newPolicyPDFs.map(p => ({ label: p.label, filename: p.filename }));
+
+    const policy = {
+        id, name, type, insurer, desc, contacts, emails,
+        pdfs:  safePdfs,   // in-memory only (lost on refresh — user must re-upload or use links)
+        links: [...newPolicyLinks]
+    };
+
+    // Store in memory (with dataUrls for this session)
+    customPolicies.push(policy);
+
+    // Save to localStorage WITHOUT base64 (to prevent storage overflow)
+    const storagePolicy = { id, name, type, insurer, desc, contacts, emails,
+        pdfs: storagePdfs,  // no dataUrl
+        links: [...newPolicyLinks]
+    };
+    try {
+        const stored = JSON.parse(localStorage.getItem('affinityCustomPolicies') || '[]');
+        stored.push(storagePolicy);
+        localStorage.setItem('affinityCustomPolicies', JSON.stringify(stored));
+    } catch(e) { showStorageWarning(); }
+
+    // Save SPOC
+    spocOverrides[id] = { insurer, contacts, emails };
+    try { localStorage.setItem('affinitySPOCOverrides', JSON.stringify(spocOverrides)); } catch(e) {}
+
+    renderCustomCard(policy);
+    document.getElementById('customPoliciesSection').style.display = 'block';
+    updateTotalCount();
+    updateStorageMeter();
+    closeAddPolicy();
+
+    // Warn user if they uploaded PDFs (they will be lost on refresh)
+    if (newPolicyPDFs.length > 0) {
+        showToast(`"${name}" saved! ⚠️ PDF viewable this session only — use Google Drive link for permanent access`);
+    } else {
+        showToast(`"${name}" policy added successfully! 🎉`);
+    }
+}
+
+// ============================================================
+//  RENDER CUSTOM CARDS
+// ============================================================
+function renderAllCustomCards() {
+    customPolicies.forEach(p => renderCustomCard(p));
+    if (customPolicies.length > 0) {
+        document.getElementById('customPoliciesSection').style.display = 'block';
+    }
+    updateTotalCount();
+}
+
+function renderCustomCard(policy) {
+    const grid = document.getElementById('customPoliciesGrid');
+    const card = document.createElement('div');
+    card.className = 'policy-card';
+    card.dataset.policyId = policy.id;
+    card.dataset.keywords = `${policy.name} ${policy.type} ${policy.insurer} ${policy.desc}`.toLowerCase();
+
+    // Build handguide buttons — uploaded PDFs
+    let guideBtns = '';
+    if (policy.pdfs && policy.pdfs.length > 0) {
+        policy.pdfs.forEach((pdf, i) => {
+            guideBtns += `<button class="policy-button" onclick="openBase64PDF('${policy.id}',${i})">📄 ${pdf.label || 'View Handguide'}</button>`;
+        });
+    }
+    // Link-based handguide buttons
+    if (policy.links && policy.links.length > 0) {
+        policy.links.forEach((lnk, i) => {
+            guideBtns += `<button class="policy-button" onclick="window.open('${lnk.url}','_blank')">🔗 ${lnk.label || 'View Handguide'}</button>`;
+        });
+    }
+    // If nothing added
+    if (!guideBtns) {
+        guideBtns = `<span style="font-size:0.82em;color:var(--muted);padding:6px 0;display:inline-block;">No handguide added</span>`;
+    }
+
+    card.innerHTML = `
+        <div class="policy-header">
+            <div class="policy-name">${policy.name}</div>
+            <div style="display:flex;align-items:center;gap:4px;">
+                <button class="spoc-button" onclick="showSPOC('${policy.id}')">SPOC Details</button>
+                <button class="delete-card-btn" onclick="deleteCustomPolicy('${policy.id}')" title="Delete this policy">🗑️</button>
+            </div>
+        </div>
+        <div class="badges">
+            <span class="policy-type">${policy.type}</span>
+            <span class="insurer-badge">${policy.insurer}</span>
+        </div>
+        <div class="policy-description">${policy.desc || 'No description provided.'}</div>
+        <div class="button-group">
+            ${guideBtns}
+            <label class="policy-button upload-button">Upload Excel<input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event,'${policy.id}')"></label>
+            <button class="policy-button view-excel-button" id="view-${policy.id}" onclick="viewExcel('${policy.id}')" disabled>View Excel</button>
+        </div>
+        <div class="excel-info" id="info-${policy.id}"><span id="date-${policy.id}"></span></div>
+    `;
+    grid.appendChild(card);
+
+    // Restore Excel if already uploaded
+    if (excelStorage[policy.id]) {
+        const btn = document.getElementById(`view-${policy.id}`);
+        const info = document.getElementById(`info-${policy.id}`);
+        const date = document.getElementById(`date-${policy.id}`);
+        if (btn) btn.disabled = false;
+        if (info) info.classList.add('visible');
+        if (date) date.textContent = `✓ ${excelStorage[policy.id].fileName} — ${excelStorage[policy.id].uploadDate}`;
+    }
+}
+
+function openBase64PDF(policyId, pdfIndex) {
+    const policy = customPolicies.find(p => p.id === policyId);
+    if (!policy || !policy.pdfs[pdfIndex]) return;
+    const pdf = policy.pdfs[pdfIndex];
+    const win = window.open('');
+    if (pdf.dataUrl.includes('application/pdf')) {
+        win.document.write(`<iframe src="${pdf.dataUrl}" style="width:100%;height:100vh;border:none;"></iframe>`);
+    } else {
+        win.document.write(`<img src="${pdf.dataUrl}" style="max-width:100%;display:block;margin:auto;">`);
+    }
+}
+
+function deleteCustomPolicy(id) {
+    if (!confirm('Delete this policy card? This cannot be undone.')) return;
+    customPolicies = customPolicies.filter(p => p.id !== id);
+    try { localStorage.setItem('affinityCustomPolicies', JSON.stringify(customPolicies)); } catch(e) {}
+    const card = document.querySelector(`[data-policy-id="${id}"]`);
+    if (card) card.remove();
+    if (document.getElementById('customPoliciesGrid').children.length === 0) {
+        document.getElementById('customPoliciesSection').style.display = 'none';
+    }
+    updateTotalCount();
+    showToast('Policy deleted.');
+}
+
+function updateTotalCount() {
+    const base = 25;
+    document.getElementById('totalPoliciesCount').textContent = base + customPolicies.length;
+}
+
+</script>
+</body>
+</html>
